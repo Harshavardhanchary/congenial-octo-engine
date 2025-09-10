@@ -19,6 +19,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
   # ---------- Backend Service ----------
   backend:
     build:
@@ -36,7 +37,7 @@ services:
       CORS_ALLOWED_METHODS: ${CORS_ALLOWED_METHODS}
       CORS_ALLOWED_HEADERS: ${CORS_ALLOWED_HEADERS}
     depends_on:
-       db:
+      db:
         condition: service_healthy
     networks:
       - chattingo-network
@@ -55,8 +56,6 @@ services:
       - backend
     environment:
       REACT_APP_API_URL: ${REACT_APP_API_URL}
-    depends_on:
-      - backend
     networks:
       - chattingo-network
 
@@ -64,4 +63,3 @@ services:
 networks:
   chattingo-network:
     driver: bridge
-
